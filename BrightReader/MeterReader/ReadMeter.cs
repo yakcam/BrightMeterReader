@@ -39,10 +39,10 @@ namespace MeterReader
                 var electricReadingResponse = await GetReading(_electricResourceId);
                 var electricReading = electricReadingResponse.GetReading();
 
-                await SendMessage($"Electric: *{electricReading.Item2 / 1000}* kWh. Date {electricReading.Item1.ToLocalTime().ToString()}", Emoji.Zap, "Electric");
+                await SendMessage($"Electric: *{electricReading.Item2 / 1000}* kWh. Date {electricReading.Item1.ToLocalTime()}", Emoji.Zap, "Electric");
 
-                var gasVolume = (3.6M * (((decimal)gasReading.Item2) / (decimal)1000)) / (_calorificValue * _correction);
-                await SendMessage($"Gas: *{Math.Round(gasVolume)}* m³. Date {gasReading.Item1.ToLocalTime().ToString()}", Emoji.Fire, "Gas");
+                var gasVolume = 3.6M * ((gasReading.Item2) / 1000M) / (_calorificValue * _correction);
+                await SendMessage($"Gas: *{Math.Round(gasVolume)}* m³. Date {gasReading.Item1.ToLocalTime()}", Emoji.Fire, "Gas");
             }
             catch (Exception ex)
             {
